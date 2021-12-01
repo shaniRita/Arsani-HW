@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, redirect, url_for
 app = Flask(__name__)
 
 @app.route('/Home')
@@ -6,14 +6,17 @@ app = Flask(__name__)
 def hello_func():
     return 'Welcome to the Home Page'
 
-@app.route('/about')
+@app.route('/about', methods=['GET'])
 def about_func():
-    return 'Welcome to about page'
+    # TODO
+    # DO SOMETHING WITH DB
+    print('About page')
+    return 'WELCOME TO ABOUT'
 
 
 @app.route('/catalog')
 def catalog_func():
-    return 'Welcome to catalog page'
+    return 'Welcome to Catalog page'
 
 if __name__ == '__main__':
     app.run(debug=True)
