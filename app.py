@@ -9,7 +9,7 @@ app = Flask(__name__)
 def home_func():
     found = True
     if found:
-        return render_template('index.html', username='shani')
+        return redirect('/about')
     else:
         return redirect(url_for(home_func))
 
@@ -28,7 +28,7 @@ def about_func():
 
 @app.route('/catalog')
 def catalog_func():
-    return "welcome"
+    return "Welcome to the catalog page"
 
 
 if __name__ == '__main__':
