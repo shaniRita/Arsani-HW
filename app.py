@@ -1,23 +1,35 @@
 from flask import Flask, redirect, url_for
+from flask import render_template
+
 app = Flask(__name__)
+
 
 @app.route('/Home')
 @app.route('/')
-def hello_func():
-    return 'Welcome to the Home Page'
+def home_func():
+    found = True
+    if found:
+        return render_template('index.html', username='shani')
+    else:
+        return redirect(url_for(home_func))
 
-@app.route('/about', methods=['GET'])
+
+@app.route('/about')
 def about_func():
-    # TODO
-    # DO SOMETHING WITH DB
-    print('About page')
-    return 'WELCOME TO ABOUT'
+    name = 'Shani'
+    second_name = 'Rita'
+    uni = 'BGU'
+    return render_template('about.html',
+                           profile={'name': 'Shani Freiman', 'Second_name': 'Rita'},
+                           university=uni,
+                           Degrees=['Bcs', 'MSc', 'GrandMaster'],
+                           Hobbies=('art', 'music', 'sql'))
 
 
 @app.route('/catalog')
 def catalog_func():
-    return 'Welcome to Catalog page'
+    return "welcome"
+
 
 if __name__ == '__main__':
     app.run(debug=True)
-

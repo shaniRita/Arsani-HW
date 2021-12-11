@@ -1,10 +1,29 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
-<body>
-$END$
+{% extends 'base.html' %}
+{%  block title %} About {% endblock %}
+{% block content %}
+<h1>About me ..</h1>
+    {% for key, value in profile.items() %}
+<h2>{{ key }}:{{ value | upper() }}</h2>
+    {% endfor %}
+    <p> Name: {{ profile.name | default('unknown' , true) | upper() }} {{ profile.second_name | upper()}}</p>
+    <p> University:{{ university  | default('unspecified' , true)}}</p>
+<h2> Degrees:</h2>
+<ol>
+    {% for degree in degrees%}
+    <li>{{ degree }}</li>
+        {% endfor %}
+</ol>
+<h2>Hobbies:</h2>
+<ul>
+    {% for hobby in hobbies %}
+        <il>{{ hobby }}</il>
+    {% endfor %}
+</ul>
+  <ul>
+        <li>{{ Hobbies[0] }}</li>
+        <li>{{ Hobbies[1] }}</li>
+        <li>{{ Hobbies[2] }}</li>
+    </ul>
+{% endblock %}
 </body>
 </html>

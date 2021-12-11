@@ -1,10 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="/static/CSS/style.css">
 </head>
-<body>
-$END$
+<body style="background-color: yellow">
+
+  {% include 'Header.html' %}
+    <hr>
+    {% block content %}message from base.html{% endblock %}
+    <hr>
+    {% include 'Footer.html' %}
+
 </body>
 </html>
