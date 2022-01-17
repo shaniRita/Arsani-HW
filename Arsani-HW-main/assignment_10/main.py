@@ -1,4 +1,8 @@
-from flask import Flask, redirect, url_for,render_template,request , session
+import requests
+from flask import Flask, redirect, url_for, render_template, request, session, jsonify
+
+from interact_with_DB import interact_db
+
 app = Flask(__name__)
 app.secret_key = '12345'
 
@@ -62,6 +66,29 @@ def assignment9_func():
 def logout_func():
     session['username'] = '' ##Log out excist user
     return render_template('assignment9.html')
+
+
+@app.route('/assignment11/users', methods=['GET'])
+def json_users():
+    query = "select * from users"
+    query_results = interact_db(query=query, query_type='fetch')
+    print(query_results)
+    return jsonify(query_results)
+
+
+@app.route('/assignment11/outer_source_backend', methods=['GET'])
+def outer_source_backend():
+    user_id = int(request.args['id']) if 'id' in request.args else None
+    if user_id:
+        return requests.get('https://reqres.in/api/users/%d' % user_id).json().get('data')
+    else:
+        return "Not a valid id"
+
+
+@app.route('/assignment11/outer_source', methods=['GET'])
+def assignment11_get_user():
+    return render_template('assignment11.html')
+
 
 from pages.assignment10.assignment10 import assignment10
 app.register_blueprint(assignment10)
